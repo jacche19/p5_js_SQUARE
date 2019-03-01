@@ -12,18 +12,28 @@
         top: 20px;
         right: 20px;
       }
+      #loser {
+        font-weight: bold;
+        font-size: 50px;
+        margin: auto;
+      }
     </style>
   </head>
   <body>
     <h1 id="coordinates"></h1>
+    <hl id="loser"></hl>
     <script>
     
       var w = window.innerWidth;
       var h = window.innerHeight;
       var ball = new ball(); //Creating new global object
-      var step = 10;
+      var ball2 = new ball2(); //second ball
+      var step1 = 10;
+      var step2 = 10;
       var x;
       var y;
+      var x2;
+      var y2;
     
       function setup() {
         createCanvas(w,h);
@@ -33,6 +43,14 @@
         background(255);
         ball.show();
         ball.move();
+        
+        ball2.show();
+        ball2.move();
+        ball2.kill();
+        ball2.faster();
+        
+        booster1.show();
+        
         document.getElementById('coordinates').innerHTML = "(" + x + ", " + y + ")";
       }
       
@@ -46,24 +64,78 @@
         this.move = function() {
           //right key pressed
           if (keyIsDown(39) && this.x < (w-50)) {
-            this.x += step;
+            this.x += step1;
           }
           //left key pressed
           if (keyIsDown(37) && this.x > 50) {
-            this.x -= step;
+            this.x -= step1;
           }
           //up key pressed
           if (keyIsDown(38) && this.y > 50) {
-            this.y -= step;
+            this.y -= step1;
           }
           //down key pressed
           if (keyIsDown(40) && this.y < (h-50)) {
-            this.y += step;
+            this.y += step1;
           }
           x = this.x;
           y = this.y;
         }
       }
+      
+      function ball2() {
+        this.x = 200; //"this" refers to the ball
+        this.y = 200;
+        this.show = function() {
+          fill(color('blue'));
+          ellipse(this.x, this.y, 100, 100);
+        };
+        this.move = function() {
+          //D (right) key pressed
+          if (keyIsDown(68) && this.x < (w-50)) {
+            this.x += step2;
+          }
+          //A (left) key pressed
+          if (keyIsDown(65) && this.x > 50) {
+            this.x -= step2;
+          }
+          //W (up) key pressed
+          if (keyIsDown(87) && this.y > 50) {
+            this.y -= step2;
+          }
+          //S (down) key pressed
+          if (keyIsDown(83) && this.y < (h-50)) {
+            this.y += step2;
+          }
+          x2 = this.x;
+          y2 = this.y;
+        };
+        this.kill = function() {
+          //dist(x1, y1, x2, y2);
+          //takes the x and y position of the first object and measures the pixels between the x and y position of the second object
+          d = dist(this.x, this.y, ball.x, ball.y);
+          if (d < 50) {
+            noLoop();
+            document.getElementById('loser').innerHTML= "YOU LOSE";
+          }
+        };
+        this.faster = function() {
+          dS = dist(this.x, this.y, booster1.x, booster1.y);
+          if (dS < 50) {
+            step2 += 5;
+          }
+        }
+      }
+      
+      function booster1() {
+        this.x = random(w);
+        this.y = random(h);
+        this.show = function() {
+          fill(color('magenta'));
+          rect(this.x, this.y, 50, 50);
+        }
+      }
+      
       
     </script>
   </body>
