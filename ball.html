@@ -26,8 +26,9 @@
     
       var w = window.innerWidth;
       var h = window.innerHeight;
-      var ball = new ball(); //Creating new global object
+      var ball1 = new ball1(); //Creating new global object
       var ball2 = new ball2(); //second ball
+      var booster = new booster();
       var step1 = 10;
       var step2 = 10;
       var x;
@@ -41,20 +42,21 @@
       
       function draw() {
         background(255);
-        ball.show();
-        ball.move();
+        ball1.show();
+        ball1.move();
         
         ball2.show();
         ball2.move();
-        ball2.kill();
-        ball2.faster();
         
-        booster1.show();
+        booster.show();
+        
+        //ball2.kill();
+        booster.faster();
         
         document.getElementById('coordinates').innerHTML = "(" + x + ", " + y + ")";
       }
       
-      function ball() {
+      function ball1() {
         this.x = 100; //"this" refers to the ball
         this.y = 100;
         this.show = function() {
@@ -110,7 +112,7 @@
           x2 = this.x;
           y2 = this.y;
         };
-        this.kill = function() {
+        /*this.kill = function() {
           //dist(x1, y1, x2, y2);
           //takes the x and y position of the first object and measures the pixels between the x and y position of the second object
           d = dist(this.x, this.y, ball.x, ball.y);
@@ -118,24 +120,29 @@
             noLoop();
             document.getElementById('loser').innerHTML= "YOU LOSE";
           }
-        };
-        this.faster = function() {
-          dS = dist(this.x, this.y, booster1.x, booster1.y);
+        };*/
+      }
+      
+      function booster() {
+        this.x = Math.floor(Math.random()*w);
+        this.y = Math.floor(Math.random()*h);
+        d = dist(this.x, this.y, ball1.x, ball1.y);
+        
+        this.show = function() {
+          fill(color('green'));
+          ellipse(this.x, this.y, 20, 20);
+          //if a character touches, stop showing
+          if (d < 50) {
+            return;
+          }
+        }
+        
+        /*this.faster = function() {
           if (dS < 50) {
             step2 += 5;
           }
-        }
+        }*/
       }
-      
-      function booster1() {
-        this.x = random(w);
-        this.y = random(h);
-        this.show = function() {
-          fill(color('magenta'));
-          rect(this.x, this.y, 50, 50);
-        }
-      }
-      
       
     </script>
   </body>
