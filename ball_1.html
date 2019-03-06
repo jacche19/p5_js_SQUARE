@@ -35,6 +35,8 @@
       var y;
       var x2;
       var y2;
+      var d1;
+      var d2;
     
       function setup() {
         createCanvas(w,h);
@@ -50,11 +52,12 @@
         ball2.kill();
         
         booster.show();
+        booster.engage()
         //booster.faster();
         
         document.getElementById('coordinates').innerHTML = "(" + x + ", " + y + ")";
       }
-      
+////////////////////////////////////////FIRST PLAYER/////////////////////////////////////////////      
       function ball1() {
         this.x = 100; //"this" refers to the ball
         this.y = 100;
@@ -83,7 +86,8 @@
           y = this.y;
         }
       }
-      
+
+////////////////////////////////////////SECOND PLAYER/////////////////////////////////////////////
       function ball2() {
         this.x = 200; //"this" refers to the ball
         this.y = 200;
@@ -121,19 +125,29 @@
           }
         };
       }
-      
+////////////////////////////////////////BOOSTER OBJECT/////////////////////////////////////////////      
       function booster() {
         this.x = Math.floor(Math.random()*w);
         this.y = Math.floor(Math.random()*h);
-        //d = dist(this.x, this.y, ball1.x, ball1.y);
         
         this.show = function() {
           fill(color('green'));
           ellipse(this.x, this.y, 20, 20);
-          //if a character touches, stop showing
+          //if ball1 touches, stop showing
           /*if (d < 50) {
             return;
           }*/
+        }
+
+        this.engage = function() {
+          d1 = dist(this.x, this.y, ball1.x, ball1.y);
+          d2 = dist(this.x,this.y,ball2.x,ball2.y);
+          if (d1 < 10) {
+            step1 += 10;
+          }
+          if (d2 < 10) {
+            step2 += 10;
+          } 
         }
         
         
