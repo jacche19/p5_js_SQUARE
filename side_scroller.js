@@ -2,7 +2,10 @@ var w = window.innerWidth;
 var h = window.innerHeight;
 var jumper = new jumper();
 var barrier = new barrier();
+var platform = new platform();
 var hit = false;
+var score = 0;
+var $ = document;
 
 function setup() {
   createCanvas(w,h);
@@ -10,14 +13,15 @@ function setup() {
 
 function draw() {
   background(0);
+  /*var scoreNum = $.getElementById('score').innerHTML;
+  scoreNum.appendChild(score);
+  */
   jumper.show();
   barrier.show();
+  platform.show();
   jumper.update();
   barrier.update();
-  hit = collideRectCircle(barrier.x, barrier.y, barrier.rectX, barrier.rectY, jumper.x , jumper.y, 50);
-  if (hit == true) {
-    noLoop();
-    }
+  barrier.kill();
 }
 
 function jumper() {
@@ -60,11 +64,31 @@ function jumper() {
       this.y = 0;
       this.velocity = 0;
     }
+    if (((this.x < ((w/2) + 50)) && (this.x > (w/2))) && ((this.y < ((h/2) + 70)) &&  (this.y > ((h/2) + 20)))) { //if jumper lands on platform, it will stop falling
+      this.velocity = 0;
+      this.gravity = 0;
+    }
+    else {
+      this.gravity = 1.5;
+    }
+  };
+  
+  this.score = function() {
+    if (this.x > barrier.x) {
+      var scoreNum = $.getElementById('score').innerHTML;
+      scoreNum++;
+    }
   };
 }
 
 function platform() {
+  this.x = w/2;
+  this.y = (h/2)-20;
   
+  this.show = function() {
+    fill(color("white"));
+    rect(this.x, this.y, 50, 30);
+  };
 }
 
 function barrier() {
@@ -92,6 +116,12 @@ function barrier() {
     }
   };
   
+  this.kill = function() {
+    hit = collideRectCircle(this.x, this.y, rectX, rectY, jumper.x , jumper.y, 25);
+    if (hit === true) {
+      noLoop();
+    }
+  };
 }
 
 function keyPressed() {
