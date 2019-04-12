@@ -3,12 +3,16 @@
     <script src="p5.min.js"></script>
     <script src="side_scroller.js"></script>
     <script src="p5.collide2d.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <style>
       body {
         overflow: hidden;
         padding: 0;
         margin: 0;
         color: white;
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 20px;
+        background-image: url("background.png");
       }
       #counter {
         background-color: gray;
@@ -18,12 +22,67 @@
         position: fixed;
         margin: auto;
       }
+      #end {
+        background-color: rgb(50, 50, 50, 0.8);
+        width: 40vw;
+        height: 60vh;
+        padding: 30px;
+        position: fixed;
+        
+        /*center on page*/
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #end_head {
+        font-size: 50px;
+        text-align: center;
+      }
+      #end_score_head {
+        text-align: center;
+      }
+      button{
+        display:inline-block;
+        padding:0.7em 1.4em;
+        margin: auto;
+        border-radius:0.15em;
+        box-sizing: border-box;
+        
+        
+        background-color:#3369ff;
+        box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+        text-align:center;
+        position:relative;
+        
+        /*text*/
+        font-family: 'Josefin Sans', sans-serif;
+        color: black;
+        font-weight: bold;
+        text-decoration:none;
+        text-transform:uppercase;
+        
+        /*center button*/
+        left: 50%;
+        transform: translate(-50%);
+      }
+      button:hover{
+        top:0.1em;
+      }
     </style>
   </head>
   <body>
     <div id="counter">
       <h1>SCORE:</h1>
-      <p id="score"></p>
+      <p id="score">0</p>
+    </div>
+    <div id="end">
+      <h1 id="end_head">GAME OVER</h1>
+      <p id="end_score_head">YOU GOT:</p>
+      <button>
+        <p>PRESS BUTTON</p>
+        <p>OR "ENTER"</p>
+        <p>KEY TO RESTART</p>
+      </button>
     </div>
   </body>
 </html>

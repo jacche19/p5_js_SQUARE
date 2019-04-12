@@ -6,14 +6,31 @@ var platform = new platform();
 var hit = false;
 var score = 0;
 var $ = document;
+let bg;
+let y = 0;
+
+/*function draw() {
+  background(bg);
+
+  stroke(226, 204, 0);
+  line(0, y, width, y);
+
+  y++;
+  if (y > height) {
+    y = 0;
+  }
+}*/
+
 
 function setup() {
+  bg = loadImage('background.png');
   createCanvas(w,h);
 }
 
 function draw() {
-  background(0);
-  /*var scoreNum = $.getElementById('score').innerHTML;
+  background(bg);
+  /*
+  var scoreNum = $.getElementById('score').innerHTML;
   scoreNum.appendChild(score);
   */
   jumper.show();
@@ -21,6 +38,7 @@ function draw() {
   platform.show();
   jumper.update();
   barrier.update();
+  jumper.score();
   barrier.kill();
 }
 
@@ -64,7 +82,7 @@ function jumper() {
       this.y = 0;
       this.velocity = 0;
     }
-    if (((this.x < ((w/2) + 50)) && (this.x > (w/2))) && ((this.y < ((h/2) + 70)) &&  (this.y > ((h/2) + 20)))) { //if jumper lands on platform, it will stop falling
+    if (((this.x < ((w/2) + 220)) && (this.x > (w/2))) && ((this.y < ((h/2) - 30)) &&  (this.y > ((h/2) - 40)))) { //if jumper lands on platform, it will stop falling
       this.velocity = 0;
       this.gravity = 0;
     }
@@ -74,9 +92,10 @@ function jumper() {
   };
   
   this.score = function() {
+    var scoreNum = $.getElementById('score').innerHTML;
     if (this.x > barrier.x) {
-      var scoreNum = $.getElementById('score').innerHTML;
-      scoreNum++;
+      score++;
+      //scoreNum.appendChild(score);
     }
   };
 }
@@ -87,13 +106,13 @@ function platform() {
   
   this.show = function() {
     fill(color("white"));
-    rect(this.x, this.y, 50, 30);
+    rect(this.x, this.y, 200, 30);
   };
 }
 
 function barrier() {
   this.x = w;
-  this.y = Math.floor(Math.random()*h);
+  this.y = Math.floor(Math.random()*(h));
   this.gravity = -2;
   this.velocity = -30;
   rectX = 100;
@@ -117,7 +136,7 @@ function barrier() {
   };
   
   this.kill = function() {
-    hit = collideRectCircle(this.x, this.y, rectX, rectY, jumper.x , jumper.y, 25);
+    hit = collideRectCircle(this.x, this.y, rectX, rectY, jumper.x , jumper.y, 32);
     if (hit === true) {
       noLoop();
     }
@@ -133,5 +152,9 @@ function keyPressed() {
   }
   if (keyCode === 39) { //right
     jumper.right();
+  }
+  //if "enter" key is pressed, restart game
+  if (keyCode === 13) { //enter
+    location.reload();
   }
 }
