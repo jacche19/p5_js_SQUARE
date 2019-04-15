@@ -7,7 +7,7 @@ var hit = false;
 var score = 0;
 var $ = document;
 let bg;
-let y = 0;
+let sp;
 
 /*function draw() {
   background(bg);
@@ -24,10 +24,12 @@ let y = 0;
 
 function setup() {
   bg = loadImage('background.png');
+  sp = loadImage('spaceship.jpeg');
   createCanvas(w,h);
 }
 
 function draw() {
+  clear();
   background(bg);
   /*
   var scoreNum = $.getElementById('score').innerHTML;
@@ -50,8 +52,8 @@ function jumper() {
   this.velocity = 0; //Velocity of player
   
   this.show = function() {
-    fill(color("red"));
     ellipse(this.x, this.y, 50, 50);
+    fill(color('white'));
   };
   
   this.up = function() {
@@ -139,6 +141,7 @@ function barrier() {
     hit = collideRectCircle(this.x, this.y, rectX, rectY, jumper.x , jumper.y, 32);
     if (hit === true) {
       noLoop();
+      $.getElementById("end").style.display = "inline";
     }
   };
 }
@@ -157,4 +160,8 @@ function keyPressed() {
   if (keyCode === 13) { //enter
     location.reload();
   }
+}
+
+function restart() {
+  location.reload();
 }

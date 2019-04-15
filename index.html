@@ -1,8 +1,48 @@
 <html>
   <head>
-    
+    <script src="p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <style>
+      body {
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+        color: white;
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 20px;
+        background-color: black;
+      }
+      
+      button{
+        display:inline-block;
+        padding:0.7em 1.4em;
+        margin: auto;
+        border-radius:0.15em;
+        box-sizing: border-box;
+        
+        background-color:#3369ff;
+        box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+        text-align:center;
+        position:relative;
+        
+        /*text*/
+        font-family: 'Josefin Sans', sans-serif;
+        color: black;
+        font-weight: bold;
+        text-decoration:none;
+        text-transform:uppercase;
+      }
+      
+      h1 {
+        
+      }
+    </style>
   </head>
   <body>
-    
+    <script src="side_scroller.html"></script>
+    <h1>SPACE DODGE</h1>
+    <button id="start" onclick="start()">START</button>
+    <button id="instructions">INSTRUCTIONS</button>
   </body>
 </html>
