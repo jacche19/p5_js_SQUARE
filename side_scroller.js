@@ -21,7 +21,6 @@ let sp;
   }
 }*/
 
-
 function setup() {
   bg = loadImage('background.png');
   sp = loadImage('spaceship.jpeg');
