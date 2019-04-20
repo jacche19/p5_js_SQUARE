@@ -11,10 +11,16 @@
         color: white;
         font-family: 'Josefin Sans', sans-serif;
         font-size: 20px;
+        min-width: 1000px;
+        min-height: 1000px;
+
         background-image: url('space.jpeg');
+        background-position: center;
+        background-repeat: no-repeat;
         background-size: cover;
+        position: relative;
       }
-      
+
       button {
         display: inline-block;
         padding: 0.7em 1.4em;
@@ -22,13 +28,12 @@
         border-radius: 0.15em;
         box-sizing: border-box;
         font-size: 25px;
-        top: -20px;
-        
+
         background-color: purple;
         box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
         text-align: center;
         position: relative;
-        
+
         /*text*/
         font-family: 'Josefin Sans', sans-serif;
         color: white;
@@ -36,32 +41,36 @@
         text-decoration: none;
         text-transform: uppercase;
       }
-      
+
       #cont {
+        /*
         box-shadow: 0 0 50px white,
           inset 0 0 50px white,
           0 0 100px purple,
           inset 0 0 100px purple;
+          */
         border-radius: 50px;
         border-width: 0px;
         border-color: purple;
-        height: 50vh;
-        width: 50vw;
+        height: auto;
+        width: 1000px;
         margin: auto;
         transform: translateY(50%);
-        padding: 2vh;
         text-align: center;
-      }
-      
-      #title {
-        top: 30px;
-        font-size: 14vh;
-        color: #fff;
-        animation: neon1 1.5s ease-in-out infinite alternate;
+        animation: glow_box 1.5s ease-in-out infinite alternate;
         transition: all 0.5s;
       }
-      
-      @keyframes neon1 {
+
+      #title {
+        font-size: 20vh;
+        color: #fff;
+        animation: glow_text 1.5s ease-in-out infinite alternate;
+        transition: all 0.5s;
+        font-family: 'VT323', monospace;
+        line-height: 25vh;
+      }
+
+      @keyframes glow_text {
         from {
           text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px purple, 0 0 70px purple, 0 0 80px purple, 0 0 100px purple;
         }
@@ -69,7 +78,18 @@
           text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px purple, 0 0 35px purple, 0 0 40px purple, 0 0 50px purple;
         }
       }
-      
+
+      @keyframes glow_box {
+        from {
+          box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px purple, 0 0 70px purple, 0 0 80px purple, 0 0 100px purple,
+            inset 0 0 10px #fff, inset 0 0 20px #fff, inset 0 0 40px purple, inset 0 0 70px purple, inset 0 0 80px purple, inset 0 0 100px purple;
+        }
+        to {
+          box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px purple, 0 0 35px purple, 0 0 40px purple, 0 0 50px purple,
+            inset 0 0 5px #fff, inset 0 0 10px #fff, inset 0 0 20px purple, inset 0 0 35px purple, inset 0 0 40px purple, inset 0 0 50px purple;
+        }
+      }
+
     </style>
   </head>
   <body>
@@ -81,7 +101,6 @@
     <div id="cont">
       <h1 id="title">SPACE DODGE</h1>
       <button id="start" onclick="start()">START</button>
-      <button id="instructions">INSTRUCTIONS</button>
     </div>
   </body>
 </html>
