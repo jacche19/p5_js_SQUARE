@@ -1,24 +1,28 @@
 <html>
   <head>
     <script src="p5.min.js"></script>
-    <script src="side_scroller.js"></script>
+    <script src="side_scroller1.js"></script>
     <script src="p5.collide2d.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="side_scroller.css">
   </head>
   <body>
-    <div id="counter">
-      <h1>SCORE:</h1>
-      <p id="score">0</p>
-    </div>
-    <div id="end">
-      <h1 id="end_head">GAME OVER</h1>
-      <p id="end_score_head">YOU GOT:</p>
-      <button onclick="restart()">
-        <p>PRESS BUTTON</p>
-        <p>OR "ENTER"</p>
-        <p>KEY TO RESTART</p>
-      </button>
+    <audio controls>
+      <source src="benspund-straight.mp3" type="audio/mpeg"></source>
+    </audio>
+    <div id="window">
+      <div id="counter">
+        <p id="score">SCORE:</p>
+      </div>
+      <div id="end">
+        <h1 id="end_head">GAME OVER</h1>
+        <p id="end_score_head">YOU GOT:</p>
+        <button onclick="restart()">
+          <p>PRESS BUTTON</p>
+          <p>OR "ENTER"</p>
+          <p>KEY TO RESTART</p>
+        </button>
+      </div>
     </div>
   </body>
 </html>

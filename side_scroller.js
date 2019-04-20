@@ -9,31 +9,15 @@ var $ = document;
 let bg;
 let sp;
 
-/*function draw() {
-  background(bg);
-
-  stroke(226, 204, 0);
-  line(0, y, width, y);
-
-  y++;
-  if (y > height) {
-    y = 0;
-  }
-}*/
-
 function setup() {
-  bg = loadImage('background.png');
-  sp = loadImage('spaceship.jpeg');
+  frameRate(60);
   createCanvas(w,h);
+  bg = loadImage('background.png');
 }
 
 function draw() {
   clear();
   background(bg);
-  /*
-  var scoreNum = $.getElementById('score').innerHTML;
-  scoreNum.appendChild(score);
-  */
   jumper.show();
   barrier.show();
   platform.show();
@@ -49,28 +33,28 @@ function jumper() {
   this.gravity = 1.5; //Force of gravity
   this.lift = -30; //Opposing force of gravity
   this.velocity = 0; //Velocity of player
-  
+
   this.show = function() {
     ellipse(this.x, this.y, 50, 50);
     fill(color('white'));
   };
-  
+
   this.up = function() {
     this.velocity += this.lift; //Jumping function
   };
-  
+
   this.right = function() {
     if ((this.x < w) && (this.y > 0)) {
      this.x += 20;
     }
   };
-  
+
   this.left = function() {
     if ((this.x < w) && (this.y > 0)) {
      this.x -= 20;
     }
   };
-  
+
   this.update = function() {
     this.velocity += this.gravity; //Gravity applied when not jumping
     this.y += this.velocity;
@@ -91,20 +75,17 @@ function jumper() {
       this.gravity = 1.5;
     }
   };
-  
+
   this.score = function() {
-    var scoreNum = $.getElementById('score').innerHTML;
-    if (this.x > barrier.x) {
-      score++;
-      //scoreNum.appendChild(score);
-    }
+    score++;
+    $.getElementById('score').innerHTML = "SCORE: " + score;
   };
 }
 
 function platform() {
   this.x = w/2;
   this.y = (h/2)-20;
-  
+
   this.show = function() {
     fill(color("white"));
     rect(this.x, this.y, 200, 30);
@@ -118,12 +99,12 @@ function barrier() {
   this.velocity = -30;
   rectX = 100;
   rectY = 100;
-  
+
   this.show = function() {
     fill(color("blue"));
     rect(this.x, this.y, rectX, rectY);
   };
-  
+
   this.update = function() {
     this.velocity += this.gravity;
     this.x += this.velocity;
@@ -135,7 +116,7 @@ function barrier() {
       rectY = 50 + Math.floor(Math.random()*h/3);
     }
   };
-  
+
   this.kill = function() {
     hit = collideRectCircle(this.x, this.y, rectX, rectY, jumper.x , jumper.y, 32);
     if (hit === true) {
